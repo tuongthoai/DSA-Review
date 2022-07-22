@@ -1,0 +1,530 @@
+\documentclass{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[vietnamese=nohyphenation]{hyphsubst}
+\usepackage[vietnamese]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{minted}
+\usepackage{graphicx}
+\graphicspath{ {./image/} }
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{concept}{Concept}
+
+
+
+
+\title{DSA-REVIEW}
+\author{Tang Tuong Thoai }
+\date{July 2022}
+
+\begin{document}
+\maketitle
+
+\section{INTRODUCTION TO DATA STRUCTURES AND ALGORITHMS}
+\begin{concept}[1]
+    A data structure is a way to store and organize data in order to facilitate access and modifications.
+\end{concept}
+
+
+
+• It is important to choose an appropriate data structure for a problem,
+because each data structure has its own advantages and disadvantages.
+
+\begin{concept}[2]
+   An algorithm is any well-defined computational procedure that takes some value, or set of values, as input and produces some value, or set of values, as output.
+\end{concept}
+
+
+
+\section{ALGORITHM ANALYSIS}
+\subsection{Analysis of Algorithms} 
+Analysing an algorithm has come to mean predicting the resources that the algorithm requires.
+
+There are two types of analysis
+\begin{itemize}
+    \item Empirical Analysis
+    \item Mathematical Analysis
+\end{itemize}
+
+The reason why we analysis the algorithm
+\begin{enumerate}
+    \item to compare different algorithms for the same task
+    \item to predict performance in a new environment
+    \item to optimize the algorithm
+\end{enumerate}
+
+\subsection{Time complexity}
+The time complexity of an algorithm estimates how much time the algorithm will use for some input. 
+\begin{equation}
+    time complexity = T(input size) 
+\end{equation}    
+    
+Input size depends on the problem.
+\begin{itemize}
+    \item The input size can be the number of items in the input
+    \item The input size is the total number of bits needed to represent the input.
+    \item Sometimes, it is more appropriate to describe the size of the input with two numbers rather than one.
+\end{itemize}
+
+\subsection{Asymptotic}
+\subsubsection{\textit{O}-notation}
+
+Given function g(n), we denote by O(g(n)) the set of functions {f (n)}, there exist positive constants c and n0 such that \begin{equation}
+    0 \leq f(n) \leq c\times g(n), \forall n \geq  n_0    
+\end{equation}
+
+\begin{itemize}
+    \item We write $T(n) = O(g(n))$ to indicate that a function $T(n)$ is a member of the set $O(g(n))$
+    \item Commonly encountered order-of-growth functions\\\
+    
+    \begin{center}
+        \begin{tabular}{lc}
+            \toprule
+            \textbf{description} &  function   \\
+            \midrule
+                constant function & $1$\\
+                logarithm & $\log n$\\
+                linear function & n\\
+                n-log-n function & n log n\\
+                quadratic function & $n^2$\\
+                cubic function & $ n^3$ \\
+                exponential function & $2^n$\\
+                permuation function & $n!$\\
+            \bottomrule
+        \end{tabular}
+        
+        
+    \end{center}
+    Example 1 
+        
+        Prove that $T(n) = 2n^4 + 3n^3 + 5n^2 + 2n + 3 = O(n^4)$
+        
+        Proof 
+        
+        Chú ý rằng $$2n^4+3n^3+5n^2+2n+3 \leq 2n^4+3n^4+5n^4+2n^4+3n^4 = (2+3+5+2+3)n^4 = 15n^4,\: n \geq 1$$
+\end{itemize}
+
+    \begin{theorem}
+        $T(n) = a_0 + a_1n + ... + a_d n^d \: \text{where} \: a_d > 0 \: \text{then} \: T(n) = O(n^d)$
+    \end{theorem}
+
+\subsection{$\Omega$ - notation}
+\begin{concept}
+    Given function $g(n)$, we denote by $\Omega(g(n))$ the set of function $\{f(n)\}$, there exist a positive constant $c$ and $n_0$ such that   
+\end{concept}
+
+\begin{equation}
+    f(n) \geq c \times g(n), \forall n > n_0
+\end{equation}
+\subsection{$\Theta$-notation}
+\begin{concept}
+    Given function $g(n)$, we denote by $\Theta(g(n))$ the set of functions $\{f(n)\}$, there exist positive constants $c_1, c_2$, and $n_0$ such that
+\end{concept}
+
+\begin{equation}
+    c_1\times g(n) \leq f(n) \leq c_2\times g(n), \forall n ≥ n_0    
+\end{equation}
+\subsubsection{Series}
+\begin{align}
+    \sum_{k = 1}^{N} k &= \frac{1}{2}(N^2 + N) &
+    \sum_{k = 1}^{N} k^2 &= \frac{1}{6}(2n^3 + 3N^2 + N)\\
+    \sum_{k = 1}^{N} k^3 &= \frac{1}{4}(N^4+ 2N^3 + N^2) &
+    \sum_{k = 1}^{N} r^k &= \frac{1-r^{n+1}}{1-r}
+\end{align}
+\subsubsection{Approximation calculation}
+\begin{enumerate}
+    \item Using define integral
+    \item Harmonic Series 
+        \begin{equation}
+            1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{N} = \int_1^{N} \frac{1}{k}\ dx = \ln{n}
+        \end{equation}
+\end{enumerate}
+\textbf{NOTE: Hàm sinh tự tìm hiểu thêm nếu có thể}
+
+
+    ordinary generating function - OGF
+\subsection{Algorithm Analysis}
+Độ phức tạp tính toán bao gồm:
+\begin{enumerate}
+    \item Chi phí thời gian (thời gian thực hiện)
+    \item CHi phí không gian (không gian lưu trữ)
+\end{enumerate}
+Các yếu tố ảnh hưởng đến thời gian thực hiện chương trình là:
+\begin{itemize}
+    \item Cấu hình máy tính
+    \item Ngôn ngữ lập trình
+    \item Cấu trúc dữ liệu
+    \item Cài đặt chi tiết của thuật toán
+\end{itemize}
+
+\begin{concept}
+    Thời gian thực hiện hay chi phí thực hiện hay độc phức tạp chương trình là hàm của kích thước dữ liệu đầu vào. Kí hiệu là $T(n) $ trong đó $n$ là kích thước hay độ lớn của dữ liệu đầu vào.
+    
+\end{concept}
+
+\begin{enumerate}
+    \item Thời gian thực hiện của chương trình là 1 hàm không âm.
+    \item Đơn vị của $T(n)$ không phải là đơn vị thời gian mà được đo bằng số lệnh cơ bản (basic operation) được thực hiện trên 1 máy tính lý tưởng.
+    \item
+        Các lệnh cơ bản gồm:
+        \begin{itemize}
+            \item Các lệnh so sánh
+            \item Các lệnh gán
+            \item Các lệnh số học
+        \end{itemize}
+    \item Khi thực hiện xác định $T(n)$ không cần quá chi tiết, cố gắng đơn giản bớt các lệnh cơ bản.
+\end{enumerate}
+
+Các phương pháp xác định thời gian thực hiện của chương trình
+\begin{enumerate}
+    \item Chạy thực nghiệm: chạy thử và thống kê
+    \item Dùng toán học
+        \begin{itemize}
+            \item PP Đếm
+            \item PP Truy hồi
+            \item PP Hàm sinh
+        \end{itemize}
+\end{enumerate}
+
+Do hàm T(n) không chỉ phụ thuộc vào n mà còn phụ thuộc vào cấu trúc của dữ liệu. Do đó, trong phương pháp toán học, khi phân tích thuật toán người ta thường phân tích dựa trên 3 tình huống:
+\begin{enumerate}
+    \item Trường hợp tốt nhất (best case): Không phản ánh được cái “tốt thật sự” của thuật toán
+    \item Trường hợp trung bình (average case): Phản ánh chính xác nhật cái “tốt thật sự” những rất khó tính chính xác
+    \item Trường hợp xấu nhất (worst case): Cho một sự “bảo đảm”.
+\end{enumerate}
+
+\textbf{Lưu ý}:
+Trong thực tế, người lập trình chỉ nên đánh giá T(n) cho trường hợp xấu nhất hoặc trung bình. Không cần phải đưa ra giá trị chính xác của T(n) mà chỉ cần
+đưa ra hàm ước lượng
+
+\subsection{Master Theorem}
+
+\begin{theorem}[MASTER THEOREM]
+ \;
+
+Ý tưởng:
+\begin{itemize}
+    \item Để giải bài toán có kích thước $n$ ta chia bài toán thành $a$ bài toán con, mỗi bài toán có kích thước là $\frac{n}{b}$. Giải các bài toán con này và tổng hợp kết quả để giải bài toán ban đầu.
+    
+    \item với bài toán con ta tiếp tực áp dụng kĩ thuật chia nhỏ đến khi kích thước bài toán con là 1.
+\end{itemize}
+
+Lưu ý
+\begin{enumerate}
+    \item Giả thiết mỗi bài toán có kích thước là 1 cần 1 đơn vị thời gian
+    \item Giả thiết thời gian để chia bài toán thành bài toán con và tổng hợp các kết quả bài toán thành kết quả cho bài toán lớn là d(n)
+\end{enumerate}
+\end{theorem}
+
+
+Bài tập và ví dụ xem slide lect02
+
+\section{SORTING}
+\begin{concept}[1]
+    Sorting is a fundamental algorithm design problem. Many efficient algorithms use sorting as a subroutine, because it is often easier to process data if the elements are in a sorted order.
+\end{concept}
+
+\begin{concept}[2]
+    An \textbf{inversion} is a pair of keys that are out of order in the array
+\end{concept}
+
+\begin{concept}[3]
+    If the number of inversions in an array is less than a constant multiple of the array size, we say that the array is \textbf{partially sorted}.
+\end{concept}
+\begin{concept}[4]
+    A sorting method is \textbf{stable} if it preserves the relative order of equal keys in the array
+\end{concept}
+
+\subsection{Selection Sort}
+
+Idea
+Assume that the array a is composed of two parts: the left part s is sorted and
+the right part u is unsorted
+\begin{enumerate}
+    \item s = ∅ and u = a
+    \item Find the smallest element x of the part u
+    \item Remove x from u
+    \item Append x to s
+\end{enumerate}
+Repeat the actions 2-4 until u is empty
+
+\begin{minted}[mathescape, linenos]{python}
+template <class Item >
+void selection (Item a[], int l, int r) {
+    for (int i = l; i < r; i++) {
+        int min = i;
+        for (int j = i + 1; j <= r; j++)
+        if (a[j] < a[min]) min = j;
+        swap(a[i], a[min]);
+    }
+}
+\end{minted}
+
+\begin{theorem}
+ Selection sort uses $\sim \frac{N^2}{2}$ compares and $N$ exchanges to sort an array of length $N$.
+\end{theorem}
+Selection sort is unstable.
+
+\subsection{Insertion Sort}
+Idea
+
+Assume that the array a is composed of two parts: the left part s is sorted and the right part u is unsorted 
+\begin{enumerate}
+    \item  s = ∅ and u = a
+    \item Remove the first elements x of u
+    \item Insert x into its proper place among s
+\end{enumerate}
+Repeat the actions 2-3 until u is empty.
+
+
+\textbf{Implementation}
+\begin{minted}[mathescape, linenos]{python}
+template <class Item >
+void insertion (Item a[], int l, int r) {
+    int i;
+    for (i = r; i > l; i--) compare_swap (a[i - 1], a[i]);
+    for (i = l + 2; i <= r; i++) {
+        v = a[i];
+        for (int j = i; v < a[j - 1]; j--)  a[j] = a[j - 1];
+        a[j] = v;
+    }
+}
+\end{minted}
+
+\begin{theorem}
+ The number of exchanges used by insertion sort is equal to the number of
+inversions in the array, and the number of compares is at least equal to the
+number of inversions and at most equal to the number of inversions plus the array size minus 1.
+\end{theorem}
+
+\begin{theorem}
+ Insertion sort uses $\sim N^2/4 compares and \sim N^2/4$ exchanges to sort a randomly ordered array of length N with distinct keys, on the average.
+\end{theorem}
+Stable: YES
+\subsection{Bubble Sort}
+
+\textbf{Implementation}
+\begin{minted}[mathescape, linenos]{python}
+template <class Item >
+void bubble(Item a[], int l, int r) {
+    for (int i = l; i < r; i++)
+        for (int j = r; j > i; j--)
+            compare_swap (a[j - 1], a[j]);
+}
+\end{minted}
+Stable: YES
+
+\subsection{Merge Sort}
+Idea
+
+Merge sort sorts a subarray a[l . . .r] as follows:
+\begin{enumerate}
+\item If l ≥ r, do not do anything, because the subarray is already sorted or empty.
+\item Calculate the position of the middle element: m = b(l + r)/2c.
+\item Recursively sort the subarray a[l . . . m].
+\item Recursively sort the subarray a[m + 1 . . .r].
+\item Merge the sorted subarrays a[l . . . m] and a[m + 1 . . .r] into a sorted subarray a[l . . .r].
+\end{enumerate}
+\textbf{Implementation}
+\begin{minted}[mathescape, linenos]{python}
+template <class Item >
+void mergesort (Item a[], Item aux[], int l, int r) {
+    if (r <= l) return;
+    int m = (l + r) / 2;
+    mergesort (a, aux , l, m);
+    mergesort (a, aux , m + 1, r);
+    merge(a, aux , l, m, r);
+}
+
+template <class Item >
+void merge(Item a[], Item aux[], int l, int m, int r) {
+    int i, j, k;
+    for (k = l; k <= r; k++)
+        aux[k] = a[k];
+    i = l; j = m + 1; k = l;
+    while (i <= m && j <= r)
+        if (aux[i] <= aux[j]) a[k++] = aux[i++];
+    else a[k++] = aux[j++];
+    while (i <= m)
+        a[k++] = aux[i++];
+    while (j <= r)
+        a[k++] = aux[j++];
+}
+\end{minted}
+Stable: YES
+
+
+\subsection{Bottom-up Merge Sort}
+Idea
+Bottom-up merge sort consists of
+\begin{enumerate}
+    \item A sequence of passes over the whole array doing sz-by-sz merges
+    \item Doubling sz on each pass.
+    \item The final subarray is of size sz only if the array size is an even multiple of sz, so the final merge is an sz-by-x merge, for some x less than or equal to sz.
+\end{enumerate}
+
+\textbf{Implementation}
+\begin{minted}[mathescape, linenos]{python}
+template <class Item >
+void mergesort (Item a[], Item aux[], int l, int r) {
+    for (int sz = 1; sz <= r - l; sz = sz + sz)
+        for (int i = l; i <= r - sz; i += sz + sz)
+            merge(a, aux , i, i + sz - 1, min(i + sz + sz - 1, r));
+}
+\end{minted}
+Stable: YES
+
+\begin{theorem}
+ Mergesort requires about $N \log_2 N$ comparisons to sort any array of $N$ elements
+\end{theorem}
+
+\subsection{Quick Sort}
+Idea
+Quicksort invented in 1960 by C. A. R. Hoare is a divide-and-conquer method for sorting 
+\begin{enumerate}
+    \item Partition an array a into two parts $a_{left}$ and $a_{right}$ such that $\forall x \in a_{left}$and $\forall y \in a_{right}$ then $x \leq y$
+    \item Sort the parts $a_{left}$ and $a_{right}$ independently
+    \item Join $a_{left}$ and $a_{right}$ to $a = a_{left} a_{right}$
+\end{enumerate}
+
+\textbf{Implementation}
+\begin{minted}[mathescape, linenos]{python}
+int partition(std::vector<int> &a, std::vector<int> &f, int l, int r)
+{
+    int randomIndex = rand() % (r - l + 1) + l;
+    swap(a[f[randomIndex]], a[f[r]]);
+    int pivot = a[f[r]];
+
+
+    int low = l;
+    int high = r - 1;
+    while(low < high)
+    {
+        while(low < high && a[f[low]] <= pivot) low++;
+        while(low < high && a[f[high]] >= pivot) high--;
+
+        swap(a[f[low]], a[f[high]]);
+        // swap(f[low], f[high]);
+    }
+
+    if(a[f[low]] > a[f[r]])
+    {
+        swap(a[f[low]], a[f[r]]);
+        // swap(f[low], f[r]);
+    }
+    else low = r;
+
+    return low;
+}
+
+void QuickSort(std::vector<int> &a, std::vector<int> &f, int l, int r)
+{
+    // sort the interval of f [l, r] only
+    if (l >= r)
+        return; // out of bound
+    int p = partition(a, f, l, r);
+
+    QuickSort(a, f, l, p - 1);
+    QuickSort(a, f, p + 1, r);
+}
+\end{minted}
+
+\subsubsection{Sorting Algorithm Comparison}
+\begin{equation}
+\begin{array}{|c|c|c|c|c|}
+\hline \text { algorithm } & \text { stable? } & \text { in-place? } & \text { running time } & \text { space } \\
+\hline \text { selection } & \text { no } & \text { yes } & N^{2} & 1 \\
+\text { insertion } & \text { yes } & \text { yes } & \text { between } N \text { and } N^{2} & 1 \\
+\text { shell } & \text { no } & \text { yes } & N \log N ?, N^{6 / 5} \text { ? } & 1 \\
+\text { merge } & \text { yes } & \text { no } & N \log N & N \\
+\text { quick } & \text { no } & \text { yes } & N \log N & \log N \\
+\text { 3-way quick } & \text { no } & \text { yes } & \text { between } N \text { and } N \log N & \log N \\
+\text { heap } & \text { no } & \text { yes } & N \log N & 1 \\
+\hline
+\end{array}
+\end{equation}
+
+\subsection{O(N) Sorting}
+\begin{itemize}
+    \item Radix Sort
+    \item Index-Counting Sorting 
+\end{itemize}
+
+Đọc thêm ở cuối slide 2 để nắm này khá dễ =))
+
+\begin{theorem}
+    No compare-based sorting algorithm can guarantee to sort N items with fewer than $\log_2{N!} \sim N\log_2{N}$ \textbf{compares}
+\end{theorem}
+\section{ELEMENTARY DATA STRUCTURE}
+Xem và ôn kỹ lại những chức năng và nguyên lý của những cấu trúc dữ liệu này đặc biệt là những ứng dụng của nó trong thực tế.Đặc biết là \textbf{Stack và Queue}.
+
+
+Expanding these algorithm 
+\begin{itemize}
+    \item Deque
+    \item 2 Stack
+\end{itemize}
+
+\section{Symbol Tables}
+Tự đọc slide khá đơn giản =)))
+
+\section{Trees}
+
+\subsection{Introduction}
+\textbf{Trees} are a mathematical abstrction that play a central role in the design and analysis of algorithms because 
+\begin{itemize}
+    \item Trees are used to describe dynamic properties of algorithms
+    \item Trees are fundamental data storage structures that combine advantages of an array and a linkedlist
+        \begin{itemize}
+            \item \textbf{Searching} as fast as array.
+            \item \textbf{Insertion} and \textbf{deletion} as fast as array.
+        \end{itemize}
+\end{itemize}
+
+\begin{concept}\:
+
+
+    A tree is a nonlinear collection. it consists of 
+    \begin{itemize}
+        \item A set of nodes that often represent entities.
+        \item A set of edges/links that represent the relationship between nodes.
+    \end{itemize}
+    
+    A tree T (\textbf{rooted tree})
+\begin{itemize}
+    \item is empty tree
+    $$T = \emptyset$$
+    
+    \item is a node r (root node) connected to a sequence of disjoint trees $\{T_1, T_2, \dots, T_n\}$ called subtrees.
+    
+    $$T = \{ r \xrightarrow[]{} \{T_1, T_2, \dots \}\}$$
+\end{itemize}
+\end{concept}
+
+\subsubsection{Terminology}
+In a tree
+\begin{itemize}
+    \item Node: a simple object
+    \item Edge/Link/Branch: a connection between two nodes
+\end{itemize}
+
+In a connection
+\begin{itemize}
+    \item Parent node: above a node
+    \item Child node: below a node
+\end{itemize}
+
+In a tree or a subtree
+\begin{itemize}
+    \item Root node: doesn't have parent
+    \item Leaf node/External node node doesn't have children
+    \item Internal node node has children
+    \item Siblings nodes node have the same parent
+\end{itemize}
+\end{document}
