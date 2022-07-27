@@ -8,7 +8,7 @@
 template<typename T>
 int partition(std::vector<T> &a, int l, int r)
 {
-    int randomIndex = rand() % (r - l + 1) + l;
+    int randomIndex = std::rand() % (r - l + 1) + l;
     std::swap(a[r], a[randomIndex]);
     T pivot = a[r];
     int low = l;
