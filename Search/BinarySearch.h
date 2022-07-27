@@ -1,5 +1,6 @@
 #include <algorithm>
 
+//Before using BinarySearch, the array must be sorted in advance
 template <typename T>
 int BinarySearch(T a[], int left, int right, T key)
 {
