@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <algorithm>
 
 template <typename T>
 void selectionSort(T[], int left, int right)
@@ -10,6 +10,6 @@ void selectionSort(T[], int left, int right)
         {
             if (a[j] < a[min]) min = j;
         }
-        swap(a[i],a[min]);
+        std::swap(a[i],a[min]);
     }
 }
