@@ -1,7 +1,7 @@
 #include <algorithm>
 
 template <typename T>
-void bubbleSort(T a[], int left, int right)
+void bubbleSort(T a[], int n)
 {
     int i, j;
     for (i = 0; i < n - 1; i++)
