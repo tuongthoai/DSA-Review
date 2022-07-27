@@ -115,19 +115,3 @@ istream &operator>>(istream &is, TVertex &v)
     is >> v;
     return is;
 }
-int main()
-{
-    Graph G;
-
-    G.Set_Kind(G, "direct");
-
-    G.Add_Vertex(G, "A");
-    G.Add_Vertex(G, "B");
-    G.Add_Vertex(G, "C");
-
-    G.Add_Edge(G, TEdge("A", "B"));
-    G.Add_Edge(G, TEdge("B", "C"));
-
-    G.Print_Graph(G);
-    return 0;
-}
