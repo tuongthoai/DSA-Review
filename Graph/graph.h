@@ -15,6 +15,7 @@ typedef string TVertex;
 typedef pair<TVertex, TVertex> TEdge;
 typedef vector<TVertex>::iterator iTVertex;
 typedef vector<TEdge>::iterator iTEdge;
+
 struct Graph
 {
     string m_kind;

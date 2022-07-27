@@ -6,7 +6,7 @@
 
 //co the dung bat ki kieu du lieu nao cung duoc mien la chung ta dinh nghia phep so sanh cho no 
 template<typename T>
-int partition(std::vector<T> &a, int l, int r)
+int partition(std::vector<T> &a, int l, int r) //[l, r]
 {
     int randomIndex = std::rand() % (r - l + 1) + l;
     std::swap(a[r], a[randomIndex]);
