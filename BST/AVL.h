@@ -117,38 +117,6 @@ private:
         return tp2;
     }
 
-    Node<T> *singleRightRotate(Node<T> *&t)
-    {
-        Node<T> *u = t->left;
-        t->left = u->right;
-        u->right = t;
-        t->height = std::max(getHeight(t->left), getHeight(t->right)) + 1;
-        u->height = std::max(getHeight(u->left), t->height) + 1;
-        return u;
-    }
-
-    Node<T> *singleLeftRotate(Node<T> *&t)
-    {
-        Node<T> *u = t->right;
-        t->right = u->left;
-        u->left = t;
-        t->height = std::max(getHeight(t->left), getHeight(t->right)) + 1;
-        u->height = std::max(getHeight(t->right), t->height) + 1;
-        return u;
-    }
-
-    Node<T> *doubleLeftRotate(Node<T> *&t)
-    {
-        t->right = singleRightRotate(t->right);
-        return singleLeftRotate(t);
-    }
-
-    Node<T> *doubleRightRotate(Node<T> *&t)
-    {
-        t->left = singleLeftRotate(t->left);
-        return singleRightRotate(t);
-    }
-
     Node<T> *insert(Node<T> *r, T data)
     {
 
@@ -190,7 +158,6 @@ private:
 
     Node<T> * deleteNode(Node<T> *p, T data)
     {
-
         if (p->left == nullptr && p->right == nullptr)
         {
             if (p == this->root)
